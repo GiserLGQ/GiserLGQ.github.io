@@ -4,56 +4,6 @@
   
     
     <entry>
-      <title>C++返回数组指针（指向数组的指针）</title>
-      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/"/>
-      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/</url>
-      
-        <content type="html"><![CDATA[<hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>首先要明白一件事情：C++规定不允许返回整个数组，但可以返回指向数组的指针</code></p><h1 id="一、如果直接new一个数组，返回时会丢失size（例子如下）"><a href="#一、如果直接new一个数组，返回时会丢失size（例子如下）" class="headerlink" title="一、如果直接new一个数组，返回时会丢失size（例子如下）"></a>一、如果直接new一个数组，返回时会丢失size（例子如下）</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;* <span class="title function_">func</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//new一个数组，不管是自定义别名还是已有的类型，只会返回指向首元素类型的指针</span></span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;* arr = <span class="keyword">new</span> <span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">return</span> arr ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/cover.png"><br><code>对于类似的此问腿（比如数组作为形参），C++primer提供了三种解决的方法</code></p><h1 id="二、自定义类型名为数组"><a href="#二、自定义类型名为数组" class="headerlink" title="二、自定义类型名为数组"></a>二、自定义类型名为数组</h1><p>vecGlmarr为类内自定义的数组<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/5833c4f970114ad9836e5448de980d19.png" alt="在这里插入图片描述"></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过类名去拿自定义的类型</span></span><br><span class="line"><span class="title class_">Excelhelper</span>::vecGlmarr* <span class="title class_">Excelhelper</span>::<span class="title function_">readPlate1</span>(<span class="params">int page_index</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;* arr = <span class="keyword">new</span> vecGlmarr;<span class="comment">//new一个数组，不管是自定义别名还是已有的类型，只会返回指向首元素类型的指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例1：用自定义别名实例化一个数组</span></span><br><span class="line">vecGlmarr tem = &#123; <span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;() &#125;;<span class="comment">//std::vector&lt;glm::vec3&gt;[2]数组长度也是类型的一部分</span></span><br><span class="line"><span class="title class_">Excelhelper</span>::vecGlmarr* ptr1 = &amp;tem; <span class="comment">//ptr1是指向数组的指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例2：用正常类型名实例化一个数组</span></span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;arr2[<span class="number">2</span>];</span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;(*ptr2)[<span class="number">2</span>] = &amp;arr2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> ptr1;<span class="comment">//返回指向数组的指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/9717e48aebaf4861b6c522e7b0010d39.png" alt="在这里插入图片描述"></p><h1 id="三、使用尾置返回类型"><a href="#三、使用尾置返回类型" class="headerlink" title="三、使用尾置返回类型"></a>三、使用尾置返回类型</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto <span class="title function_">readPlate2</span>(int page_index)-&gt;<span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;(*)[<span class="number">2</span>];</span><br><span class="line"><span class="comment">//尾置返回类型，返回一个指向2个std::vector&lt;glm::vec3&gt;数组的指针</span></span><br></pre></td></tr></table></figure><h1 id="四、防止与数组的引用混淆"><a href="#四、防止与数组的引用混淆" class="headerlink" title="四、防止与数组的引用混淆"></a>四、防止与数组的引用混淆</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">example</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int arr[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//在栈上创建一个包含10个int类型的数组</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_">int</span>(*ptr)[<span class="number">10</span>] = &amp;arr;<span class="comment">//ptr是一个指针，指向10个int类型的数组</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//直接用数组名+下标访问,arr代表数组首地址</span></span><br><span class="line">    int a = arr[<span class="number">0</span>];<span class="comment">// 相当于 int a = *arr;</span></span><br><span class="line"></span><br><span class="line">    int b = arr[<span class="number">1</span>];<span class="comment">//相当于 int b = *(arr+1);</span></span><br><span class="line">    </span><br><span class="line">    int c = arr[<span class="number">2</span>];<span class="comment">//相当于 int c = *(arr+2);</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> C++相关 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 数组指针 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>C++函数调用原理</title>
-      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</url>
-      
-        <content type="html"><![CDATA[<hr><h1 id="函数调用的本质"><a href="#函数调用的本质" class="headerlink" title="函数调用的本质"></a>函数调用的本质</h1><blockquote><p>包括：<br><code>全局函数</code><br>非静态非虚函数、虚函数 (<code>成员函数</code>)<br><code>构造函数、拷贝构造函数和析构函数</code></p></blockquote><p><code>如下图：</code></p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/cover.png" alt="在这里插入图片描述"></p><h2 id="借助汇编代码理解函数的调用"><a href="#借助汇编代码理解函数的调用" class="headerlink" title="借助汇编代码理解函数的调用"></a>借助汇编代码理解函数的调用</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/08d8c44849f5437ca5aaed0c8b02fcc0.png" alt="在这里插入图片描述"></p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> C++相关 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 函数调用原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>C++对象布局总览</title>
       <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/"/>
       <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/</url>
@@ -71,6 +21,31 @@
         <tags>
             
             <tag> C++对象布局总览 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++返回数组指针（指向数组的指针）</title>
+      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/"/>
+      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/</url>
+      
+        <content type="html"><![CDATA[<hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><code>首先要明白一件事情：C++规定不允许返回整个数组，但可以返回指向数组的指针</code></p><h1 id="一、如果直接new一个数组，返回时会丢失size（例子如下）"><a href="#一、如果直接new一个数组，返回时会丢失size（例子如下）" class="headerlink" title="一、如果直接new一个数组，返回时会丢失size（例子如下）"></a>一、如果直接new一个数组，返回时会丢失size（例子如下）</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;* <span class="title function_">func</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">//new一个数组，不管是自定义别名还是已有的类型，只会返回指向首元素类型的指针</span></span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;* arr = <span class="keyword">new</span> <span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">return</span> arr ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/cover.png"><br><code>对于类似的此问腿（比如数组作为形参），C++primer提供了三种解决的方法</code></p><h1 id="二、自定义类型名为数组"><a href="#二、自定义类型名为数组" class="headerlink" title="二、自定义类型名为数组"></a>二、自定义类型名为数组</h1><p>vecGlmarr为类内自定义的数组<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/5833c4f970114ad9836e5448de980d19.png" alt="在这里插入图片描述"></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过类名去拿自定义的类型</span></span><br><span class="line"><span class="title class_">Excelhelper</span>::vecGlmarr* <span class="title class_">Excelhelper</span>::<span class="title function_">readPlate1</span>(<span class="params">int page_index</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;* arr = <span class="keyword">new</span> vecGlmarr;<span class="comment">//new一个数组，不管是自定义别名还是已有的类型，只会返回指向首元素类型的指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例1：用自定义别名实例化一个数组</span></span><br><span class="line">vecGlmarr tem = &#123; <span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;() &#125;;<span class="comment">//std::vector&lt;glm::vec3&gt;[2]数组长度也是类型的一部分</span></span><br><span class="line"><span class="title class_">Excelhelper</span>::vecGlmarr* ptr1 = &amp;tem; <span class="comment">//ptr1是指向数组的指针</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//例2：用正常类型名实例化一个数组</span></span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;arr2[<span class="number">2</span>];</span><br><span class="line"><span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;(*ptr2)[<span class="number">2</span>] = &amp;arr2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> ptr1;<span class="comment">//返回指向数组的指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/9717e48aebaf4861b6c522e7b0010d39.png" alt="在这里插入图片描述"></p><h1 id="三、使用尾置返回类型"><a href="#三、使用尾置返回类型" class="headerlink" title="三、使用尾置返回类型"></a>三、使用尾置返回类型</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto <span class="title function_">readPlate2</span>(int page_index)-&gt;<span class="attr">std</span>::vector&lt;<span class="attr">glm</span>::vec3&gt;(*)[<span class="number">2</span>];</span><br><span class="line"><span class="comment">//尾置返回类型，返回一个指向2个std::vector&lt;glm::vec3&gt;数组的指针</span></span><br></pre></td></tr></table></figure><h1 id="四、防止与数组的引用混淆"><a href="#四、防止与数组的引用混淆" class="headerlink" title="四、防止与数组的引用混淆"></a>四、防止与数组的引用混淆</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">example</span>(<span class="params"></span>)</span><br><span class="line">&#123;</span><br><span class="line">    int arr[<span class="number">10</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//在栈上创建一个包含10个int类型的数组</span></span><br><span class="line"></span><br><span class="line">    <span class="title function_">int</span>(*ptr)[<span class="number">10</span>] = &amp;arr;<span class="comment">//ptr是一个指针，指向10个int类型的数组</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//直接用数组名+下标访问,arr代表数组首地址</span></span><br><span class="line">    int a = arr[<span class="number">0</span>];<span class="comment">// 相当于 int a = *arr;</span></span><br><span class="line"></span><br><span class="line">    int b = arr[<span class="number">1</span>];<span class="comment">//相当于 int b = *(arr+1);</span></span><br><span class="line">    </span><br><span class="line">    int c = arr[<span class="number">2</span>];<span class="comment">//相当于 int c = *(arr+2);</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> C++相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数组指针 </tag>
             
         </tags>
       
@@ -121,6 +96,31 @@
         <tags>
             
             <tag> Docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++函数调用原理</title>
+      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<hr><h1 id="函数调用的本质"><a href="#函数调用的本质" class="headerlink" title="函数调用的本质"></a>函数调用的本质</h1><blockquote><p>包括：<br><code>全局函数</code><br>非静态非虚函数、虚函数 (<code>成员函数</code>)<br><code>构造函数、拷贝构造函数和析构函数</code></p></blockquote><p><code>如下图：</code></p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/cover.png" alt="在这里插入图片描述"></p><h2 id="借助汇编代码理解函数的调用"><a href="#借助汇编代码理解函数的调用" class="headerlink" title="借助汇编代码理解函数的调用"></a>借助汇编代码理解函数的调用</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/08d8c44849f5437ca5aaed0c8b02fcc0.png" alt="在这里插入图片描述"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> C++相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 函数调用原理 </tag>
             
         </tags>
       
