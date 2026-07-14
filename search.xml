@@ -4,31 +4,6 @@
   
     
     <entry>
-      <title>C++对象布局总览</title>
-      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/"/>
-      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/</url>
-      
-        <content type="html"><![CDATA[<hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先要理解清楚：<br>&#x3D;&#x3D;继承&#x3D;&#x3D;主要在意的是<code>数据成员</code>   子类中拥有父类的函数和成员（或者说子类在拥有父类所有特性的基础上，又增加了自身的特性）<br>&#x3D;&#x3D;多态&#x3D;&#x3D;主要在意的是子类的<code>函数实现</code><br>当然，&#x3D;&#x3D;动态多态&#x3D;&#x3D;是在<code>继承</code>和<code>虚函数表</code>的基础上实现的</p><h1 id="一、C-对象布局总览"><a href="#一、C-对象布局总览" class="headerlink" title="一、C++对象布局总览"></a>一、C++对象布局总览</h1><h2 id="1-1-一个类中的函数和成员变量分为哪四类"><a href="#1-1-一个类中的函数和成员变量分为哪四类" class="headerlink" title="1.1 一个类中的函数和成员变量分为哪四类"></a>1.1 一个类中的函数和成员变量分为哪四类</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/e07117b8326d4ba3af0e09dde69b0f3b.png" alt="在这里插入图片描述"></p><p>其中只有<code>虚函数</code>和<code>非静态成员</code>占用对象空间：</p><p><code>如下图：</code></p><blockquote><p>此外：&#x3D;&#x3D;不管&#x3D;&#x3D;一个类中存在多少个虚函数，&#x3D;&#x3D;虚函数表指针只有一份&#x3D;&#x3D;</p></blockquote><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/cover.png" alt="在这里插入图片描述"></p><hr><h2 id="1-2-一个对象实例中可以放哪些东西"><a href="#1-2-一个对象实例中可以放哪些东西" class="headerlink" title="1.2 一个对象实例中可以放哪些东西"></a>1.2 一个对象实例中可以放哪些东西</h2><p>A、一个实例对象中包含<code>非静态数据成员</code>、<code>虚表指针</code>以及<code>为对齐而必需的填充(pad)</code></p><blockquote><p>&#x3D;&#x3D;如果一个类中没有虚函数&#x3D;&#x3D;，那么就不存在虚函数表指针<br>&#x3D;&#x3D;如果一个类中没有非静态数据成员&#x3D;&#x3D;，那么就不存在非静态数据成员占用对象大小<br>&#x3D;&#x3D;如果一个类中非静态数据成员不需要填充&#x3D;&#x3D;，那么就填充字节占用对象大小</p></blockquote><p>B、<code>静态成员变量</code>、<code>函数</code>独立于单个实例化对象，不占用对象大小</p><hr><h2 id="1-3-影响对象大小的几个因素"><a href="#1-3-影响对象大小的几个因素" class="headerlink" title="1.3 影响对象大小的几个因素"></a>1.3 影响对象大小的几个因素</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/13b636abad774f80a281e29c484fb6a6.png" alt="在这里插入图片描述"></p><hr><h2 id="1-4-C-空类"><a href="#1-4-C-空类" class="headerlink" title="1.4 C++空类"></a>1.4 C++空类</h2><blockquote><p>C++规定空类对象大小至少为1字节，<code>只是为了区分实例化对象</code><br>例如创建了多个空类的对象，可以通过对象的内存地址区分。</p></blockquote><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/f9a41af3484a42368d3c998f5d595aa6.png" alt="在这里插入图片描述"></p><hr><h1 id="二、C-对象数据成员与内存布局"><a href="#二、C-对象数据成员与内存布局" class="headerlink" title="二、C++对象数据成员与内存布局"></a>二、C++对象数据成员与内存布局</h1><h2 id="2-1数据成员的声明顺序与内存布局"><a href="#2-1数据成员的声明顺序与内存布局" class="headerlink" title="2.1数据成员的声明顺序与内存布局"></a>2.1数据成员的声明顺序与内存布局</h2><blockquote><p>A、<code>静态数据成员</code>不影响声明顺序和内存布局<br>B、<code>非虚函数</code>独立于对象存在，也不影响声明顺序和内存布局</p></blockquote><hr><h2 id="2-2影响数据成员的声明顺序与内存布局的因素："><a href="#2-2影响数据成员的声明顺序与内存布局的因素：" class="headerlink" title="2.2影响数据成员的声明顺序与内存布局的因素："></a>2.2影响数据成员的声明顺序与内存布局的因素：</h2><blockquote><p>A、&#x3D;&#x3D;访问级别（public、protect、private）&#x3D;&#x3D;（主要看不同的编译器实现）<br>B、&#x3D;&#x3D;非静态数据成员&#x3D;&#x3D;<br>C、&#x3D;&#x3D;越靠后声明，内存地址越高&#x3D;&#x3D;</p></blockquote><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/bb640aebdaa645aa9a9cdd8165b12560.png" alt="在这里插入图片描述"></p><hr><h2 id="2-3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？"><a href="#2-3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？" class="headerlink" title="2.3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？"></a>2.3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？</h2><blockquote><p>不同访问控制级别的非静态数据成员，<code>未规定</code>内存分配顺序实际上，编译器是按照<code>声明顺序</code>来安排内存,相邻数据成员会根据声明顺序做一些<code>字节填充</code></p></blockquote><p>如下图：<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/a911f2b54110428d88a90425bc1bb997.png" alt="在这里插入图片描述"></p><hr><h2 id="2-4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发"><a href="#2-4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发" class="headerlink" title="2.4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发?"></a>2.4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发?</h2><blockquote><p>适当调整声明顺序，将<code>相同类型</code>的数据成员<code>按顺序声明</code>，会节省对象的内存大小,避免不必要的字节填充</p></blockquote><hr><h1 id="三、继承下的对象布局（非多态）不含虚函数"><a href="#三、继承下的对象布局（非多态）不含虚函数" class="headerlink" title="三、继承下的对象布局（非多态）不含虚函数"></a>三、继承下的对象布局（非多态）不含虚函数</h1><h2 id="3-1单继承的对象布局"><a href="#3-1单继承的对象布局" class="headerlink" title="3.1单继承的对象布局"></a>3.1单继承的对象布局</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/66b534c32bb7424dac54984f26e1e11c.png" alt="在这里插入图片描述"></p><blockquote><p>当将一个point3D的对象赋值给point2D的时候，编译器将会进行<code>切割</code>，也就是<code>只把point3D中的point2D拿出来</code><br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/740ce158ff1f4bd9a51f46e2744897d0.png" alt="在这里插入图片描述"></p></blockquote><hr><h2 id="3-2多继承与多重继承的对象布局"><a href="#3-2多继承与多重继承的对象布局" class="headerlink" title="3.2多继承与多重继承的对象布局"></a>3.2多继承与多重继承的对象布局</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/5b839ff27d1c4330ba0ab1f32df3fb29.png" alt="在这里插入图片描述"></p><hr><h1 id="四、继承下的对象布局（多态）含虚函数"><a href="#四、继承下的对象布局（多态）含虚函数" class="headerlink" title="四、继承下的对象布局（多态）含虚函数"></a>四、继承下的对象布局（多态）含虚函数</h1><h2 id="单继承的对象布局-多态"><a href="#单继承的对象布局-多态" class="headerlink" title="单继承的对象布局(多态)"></a>单继承的对象布局(多态)</h2><blockquote><p>1、虽然point3D<code>没有写析构函数</code>，但是编译器会为point3D<code>合成</code>一个析构函数(这个析构函数应该是虚函数？)<br>并且会在point2D的析构函数调用之前<code>调用point3D的析构函数</code>（因为<code>父类中的析构函数是虚析构</code>）<br>2、如果point3D中<code>写了析构函数</code>，那么编译器就不用为他合成，同理也会在point2D的析构函数调用之前调用point3D的析构函数</p></blockquote><blockquote><p>注意虚函数表指针指向的<code>第一个位置</code>为为虚函数print（），而不是Point2D_type_info&#96;</p></blockquote><blockquote><p>理解这个表达式很重要<code>(*p-&gt;vptr[n])(p)</code>其中p是指向基类或子类对象的指针，也就是this指针（p本身是point2D类型的指针，一直不用变化，但是它可以根据指向子类的类型来判断该调用哪个类的print函数，从而实现不同的行为，这就是<code>多态</code>）<br>关于this指针，其实类里面的函数<code>只存在一份</code>，那我们怎么<code>区分</code>是哪个对象调用的这个函数呢？当调用函数时，编译器会自动为函数的形参<code>放进去一个this指针</code>用来区分对象（个人理解）</p></blockquote><p>如果<code>只在</code>Point2D中写了一个virtual vfunc（）函数，<code>子类中没有重写</code>，那么Point3D中也会继承一份，那么p指针不管指向Point2D还是Point3D对象都会<code>调用同一个函数</code>，只是走的路径不一样</p><p>如果<code>只在</code>Point2D中写了一个普通的func1（）函数<code>Point2D::func1()</code>，调用这个函数就不用通过虚函数表了，Point3D中也会继承一份，那么p指针不管指向Point2D还是Point3D对象都会<code>调用这个函数</code>，期间发生了<code>强制类型转换</code><br>&#x3D;&#x3D;代码如下：&#x3D;&#x3D;</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Point3D</span> *p=<span class="keyword">new</span> <span class="title class_">Point3D</span>;</span><br><span class="line">p-&gt;<span class="title function_">func1</span>();<span class="comment">//将this指针（p）传进func1进行调用时，会将p强制转换成Point2D 类型的指针,然后调用Point2D::func1()</span></span><br></pre></td></tr></table></figure><p>如果<code>只在</code>Point3D中写了一个普通的func2（）函数<code>Point3D::func2()</code>，调用这个函数就不用通过虚函数表了，那么p指针指向Point3D对象时<code>不会调用</code>这个函数<br>&#x3D;&#x3D;代码如下：&#x3D;&#x3D;</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Point2D</span> *p=<span class="keyword">new</span> <span class="title class_">Point3D</span>;</span><br><span class="line"><span class="comment">//p-&gt;func2();//错误！！！！！！class&quot;Point2d&quot;没有成员&quot;func2!</span></span><br><span class="line">p-&gt;<span class="title function_">print</span>();</span><br><span class="line"><span class="title class_">Point3</span>d* e22 = dynamic_cast&lt;<span class="title class_">Point3</span>d*&gt;(p);<span class="comment">//前提是p指针确实指向了Point3d对象才能转</span></span><br><span class="line">e22-&gt;<span class="title function_">func2</span>();<span class="comment">//正确，将父类指针dynamic_cast转换为子类，调用只有子类有的函数。</span></span><br></pre></td></tr></table></figure><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/73bb9fdb04b3412fb950a47f56045fd9.png" alt="在这里插入图片描述"></p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> C++相关 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> C++对象布局总览 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>C++返回数组指针（指向数组的指针）</title>
       <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/"/>
       <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E8%BF%94%E5%9B%9E%E6%95%B0%E7%BB%84%E6%8C%87%E9%92%88%EF%BC%88%E6%8C%87%E5%90%91%E6%95%B0%E7%BB%84%E7%9A%84%E6%8C%87%E9%92%88%EF%BC%89/</url>
@@ -46,6 +21,31 @@
         <tags>
             
             <tag> 数组指针 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++函数调用原理</title>
+      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<hr><h1 id="函数调用的本质"><a href="#函数调用的本质" class="headerlink" title="函数调用的本质"></a>函数调用的本质</h1><blockquote><p>包括：<br><code>全局函数</code><br>非静态非虚函数、虚函数 (<code>成员函数</code>)<br><code>构造函数、拷贝构造函数和析构函数</code></p></blockquote><p><code>如下图：</code></p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/cover.png" alt="在这里插入图片描述"></p><h2 id="借助汇编代码理解函数的调用"><a href="#借助汇编代码理解函数的调用" class="headerlink" title="借助汇编代码理解函数的调用"></a>借助汇编代码理解函数的调用</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/08d8c44849f5437ca5aaed0c8b02fcc0.png" alt="在这里插入图片描述"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> C++相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 函数调用原理 </tag>
             
         </tags>
       
@@ -79,6 +79,31 @@
     
     
     <entry>
+      <title>C++对象布局总览</title>
+      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/"/>
+      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/</url>
+      
+        <content type="html"><![CDATA[<hr><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先要理解清楚：<br>&#x3D;&#x3D;继承&#x3D;&#x3D;主要在意的是<code>数据成员</code>   子类中拥有父类的函数和成员（或者说子类在拥有父类所有特性的基础上，又增加了自身的特性）<br>&#x3D;&#x3D;多态&#x3D;&#x3D;主要在意的是子类的<code>函数实现</code><br>当然，&#x3D;&#x3D;动态多态&#x3D;&#x3D;是在<code>继承</code>和<code>虚函数表</code>的基础上实现的</p><h1 id="一、C-对象布局总览"><a href="#一、C-对象布局总览" class="headerlink" title="一、C++对象布局总览"></a>一、C++对象布局总览</h1><h2 id="1-1-一个类中的函数和成员变量分为哪四类"><a href="#1-1-一个类中的函数和成员变量分为哪四类" class="headerlink" title="1.1 一个类中的函数和成员变量分为哪四类"></a>1.1 一个类中的函数和成员变量分为哪四类</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/e07117b8326d4ba3af0e09dde69b0f3b.png" alt="在这里插入图片描述"></p><p>其中只有<code>虚函数</code>和<code>非静态成员</code>占用对象空间：</p><p><code>如下图：</code></p><blockquote><p>此外：&#x3D;&#x3D;不管&#x3D;&#x3D;一个类中存在多少个虚函数，&#x3D;&#x3D;虚函数表指针只有一份&#x3D;&#x3D;</p></blockquote><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/cover.png" alt="在这里插入图片描述"></p><hr><h2 id="1-2-一个对象实例中可以放哪些东西"><a href="#1-2-一个对象实例中可以放哪些东西" class="headerlink" title="1.2 一个对象实例中可以放哪些东西"></a>1.2 一个对象实例中可以放哪些东西</h2><p>A、一个实例对象中包含<code>非静态数据成员</code>、<code>虚表指针</code>以及<code>为对齐而必需的填充(pad)</code></p><blockquote><p>&#x3D;&#x3D;如果一个类中没有虚函数&#x3D;&#x3D;，那么就不存在虚函数表指针<br>&#x3D;&#x3D;如果一个类中没有非静态数据成员&#x3D;&#x3D;，那么就不存在非静态数据成员占用对象大小<br>&#x3D;&#x3D;如果一个类中非静态数据成员不需要填充&#x3D;&#x3D;，那么就填充字节占用对象大小</p></blockquote><p>B、<code>静态成员变量</code>、<code>函数</code>独立于单个实例化对象，不占用对象大小</p><hr><h2 id="1-3-影响对象大小的几个因素"><a href="#1-3-影响对象大小的几个因素" class="headerlink" title="1.3 影响对象大小的几个因素"></a>1.3 影响对象大小的几个因素</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/13b636abad774f80a281e29c484fb6a6.png" alt="在这里插入图片描述"></p><hr><h2 id="1-4-C-空类"><a href="#1-4-C-空类" class="headerlink" title="1.4 C++空类"></a>1.4 C++空类</h2><blockquote><p>C++规定空类对象大小至少为1字节，<code>只是为了区分实例化对象</code><br>例如创建了多个空类的对象，可以通过对象的内存地址区分。</p></blockquote><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/f9a41af3484a42368d3c998f5d595aa6.png" alt="在这里插入图片描述"></p><hr><h1 id="二、C-对象数据成员与内存布局"><a href="#二、C-对象数据成员与内存布局" class="headerlink" title="二、C++对象数据成员与内存布局"></a>二、C++对象数据成员与内存布局</h1><h2 id="2-1数据成员的声明顺序与内存布局"><a href="#2-1数据成员的声明顺序与内存布局" class="headerlink" title="2.1数据成员的声明顺序与内存布局"></a>2.1数据成员的声明顺序与内存布局</h2><blockquote><p>A、<code>静态数据成员</code>不影响声明顺序和内存布局<br>B、<code>非虚函数</code>独立于对象存在，也不影响声明顺序和内存布局</p></blockquote><hr><h2 id="2-2影响数据成员的声明顺序与内存布局的因素："><a href="#2-2影响数据成员的声明顺序与内存布局的因素：" class="headerlink" title="2.2影响数据成员的声明顺序与内存布局的因素："></a>2.2影响数据成员的声明顺序与内存布局的因素：</h2><blockquote><p>A、&#x3D;&#x3D;访问级别（public、protect、private）&#x3D;&#x3D;（主要看不同的编译器实现）<br>B、&#x3D;&#x3D;非静态数据成员&#x3D;&#x3D;<br>C、&#x3D;&#x3D;越靠后声明，内存地址越高&#x3D;&#x3D;</p></blockquote><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/bb640aebdaa645aa9a9cdd8165b12560.png" alt="在这里插入图片描述"></p><hr><h2 id="2-3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？"><a href="#2-3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？" class="headerlink" title="2.3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？"></a>2.3不同访问控制级别的非静态数据成员如何影响数据成员的声明顺序与内存布局？</h2><blockquote><p>不同访问控制级别的非静态数据成员，<code>未规定</code>内存分配顺序实际上，编译器是按照<code>声明顺序</code>来安排内存,相邻数据成员会根据声明顺序做一些<code>字节填充</code></p></blockquote><p>如下图：<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/a911f2b54110428d88a90425bc1bb997.png" alt="在这里插入图片描述"></p><hr><h2 id="2-4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发"><a href="#2-4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发" class="headerlink" title="2.4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发?"></a>2.4字节对齐要求，对不同大小字节的非静态数据成员的声明顺序有什么启发?</h2><blockquote><p>适当调整声明顺序，将<code>相同类型</code>的数据成员<code>按顺序声明</code>，会节省对象的内存大小,避免不必要的字节填充</p></blockquote><hr><h1 id="三、继承下的对象布局（非多态）不含虚函数"><a href="#三、继承下的对象布局（非多态）不含虚函数" class="headerlink" title="三、继承下的对象布局（非多态）不含虚函数"></a>三、继承下的对象布局（非多态）不含虚函数</h1><h2 id="3-1单继承的对象布局"><a href="#3-1单继承的对象布局" class="headerlink" title="3.1单继承的对象布局"></a>3.1单继承的对象布局</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/66b534c32bb7424dac54984f26e1e11c.png" alt="在这里插入图片描述"></p><blockquote><p>当将一个point3D的对象赋值给point2D的时候，编译器将会进行<code>切割</code>，也就是<code>只把point3D中的point2D拿出来</code><br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/740ce158ff1f4bd9a51f46e2744897d0.png" alt="在这里插入图片描述"></p></blockquote><hr><h2 id="3-2多继承与多重继承的对象布局"><a href="#3-2多继承与多重继承的对象布局" class="headerlink" title="3.2多继承与多重继承的对象布局"></a>3.2多继承与多重继承的对象布局</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/5b839ff27d1c4330ba0ab1f32df3fb29.png" alt="在这里插入图片描述"></p><hr><h1 id="四、继承下的对象布局（多态）含虚函数"><a href="#四、继承下的对象布局（多态）含虚函数" class="headerlink" title="四、继承下的对象布局（多态）含虚函数"></a>四、继承下的对象布局（多态）含虚函数</h1><h2 id="单继承的对象布局-多态"><a href="#单继承的对象布局-多态" class="headerlink" title="单继承的对象布局(多态)"></a>单继承的对象布局(多态)</h2><blockquote><p>1、虽然point3D<code>没有写析构函数</code>，但是编译器会为point3D<code>合成</code>一个析构函数(这个析构函数应该是虚函数？)<br>并且会在point2D的析构函数调用之前<code>调用point3D的析构函数</code>（因为<code>父类中的析构函数是虚析构</code>）<br>2、如果point3D中<code>写了析构函数</code>，那么编译器就不用为他合成，同理也会在point2D的析构函数调用之前调用point3D的析构函数</p></blockquote><blockquote><p>注意虚函数表指针指向的<code>第一个位置</code>为为虚函数print（），而不是Point2D_type_info&#96;</p></blockquote><blockquote><p>理解这个表达式很重要<code>(*p-&gt;vptr[n])(p)</code>其中p是指向基类或子类对象的指针，也就是this指针（p本身是point2D类型的指针，一直不用变化，但是它可以根据指向子类的类型来判断该调用哪个类的print函数，从而实现不同的行为，这就是<code>多态</code>）<br>关于this指针，其实类里面的函数<code>只存在一份</code>，那我们怎么<code>区分</code>是哪个对象调用的这个函数呢？当调用函数时，编译器会自动为函数的形参<code>放进去一个this指针</code>用来区分对象（个人理解）</p></blockquote><p>如果<code>只在</code>Point2D中写了一个virtual vfunc（）函数，<code>子类中没有重写</code>，那么Point3D中也会继承一份，那么p指针不管指向Point2D还是Point3D对象都会<code>调用同一个函数</code>，只是走的路径不一样</p><p>如果<code>只在</code>Point2D中写了一个普通的func1（）函数<code>Point2D::func1()</code>，调用这个函数就不用通过虚函数表了，Point3D中也会继承一份，那么p指针不管指向Point2D还是Point3D对象都会<code>调用这个函数</code>，期间发生了<code>强制类型转换</code><br>&#x3D;&#x3D;代码如下：&#x3D;&#x3D;</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Point3D</span> *p=<span class="keyword">new</span> <span class="title class_">Point3D</span>;</span><br><span class="line">p-&gt;<span class="title function_">func1</span>();<span class="comment">//将this指针（p）传进func1进行调用时，会将p强制转换成Point2D 类型的指针,然后调用Point2D::func1()</span></span><br></pre></td></tr></table></figure><p>如果<code>只在</code>Point3D中写了一个普通的func2（）函数<code>Point3D::func2()</code>，调用这个函数就不用通过虚函数表了，那么p指针指向Point3D对象时<code>不会调用</code>这个函数<br>&#x3D;&#x3D;代码如下：&#x3D;&#x3D;</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Point2D</span> *p=<span class="keyword">new</span> <span class="title class_">Point3D</span>;</span><br><span class="line"><span class="comment">//p-&gt;func2();//错误！！！！！！class&quot;Point2d&quot;没有成员&quot;func2!</span></span><br><span class="line">p-&gt;<span class="title function_">print</span>();</span><br><span class="line"><span class="title class_">Point3</span>d* e22 = dynamic_cast&lt;<span class="title class_">Point3</span>d*&gt;(p);<span class="comment">//前提是p指针确实指向了Point3d对象才能转</span></span><br><span class="line">e22-&gt;<span class="title function_">func2</span>();<span class="comment">//正确，将父类指针dynamic_cast转换为子类，调用只有子类有的函数。</span></span><br></pre></td></tr></table></figure><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/73bb9fdb04b3412fb950a47f56045fd9.png" alt="在这里插入图片描述"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> C++相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++对象布局总览 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker</title>
       <link href="/2023/11/11/%E8%B7%A8%E5%B9%B3%E5%8F%B0/Docker/Docker%E5%AE%9E%E7%94%A8%E7%AF%87/"/>
       <url>/2023/11/11/%E8%B7%A8%E5%B9%B3%E5%8F%B0/Docker/Docker%E5%AE%9E%E7%94%A8%E7%AF%87/</url>
@@ -96,31 +121,6 @@
         <tags>
             
             <tag> Docker </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>C++函数调用原理</title>
-      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</url>
-      
-        <content type="html"><![CDATA[<hr><h1 id="函数调用的本质"><a href="#函数调用的本质" class="headerlink" title="函数调用的本质"></a>函数调用的本质</h1><blockquote><p>包括：<br><code>全局函数</code><br>非静态非虚函数、虚函数 (<code>成员函数</code>)<br><code>构造函数、拷贝构造函数和析构函数</code></p></blockquote><p><code>如下图：</code></p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/cover.png" alt="在这里插入图片描述"></p><h2 id="借助汇编代码理解函数的调用"><a href="#借助汇编代码理解函数的调用" class="headerlink" title="借助汇编代码理解函数的调用"></a>借助汇编代码理解函数的调用</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/08d8c44849f5437ca5aaed0c8b02fcc0.png" alt="在这里插入图片描述"></p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> C++相关 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 函数调用原理 </tag>
             
         </tags>
       
