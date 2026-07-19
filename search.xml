@@ -29,31 +29,6 @@
     
     
     <entry>
-      <title>C++函数调用原理</title>
-      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
-      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</url>
-      
-        <content type="html"><![CDATA[<hr><h1 id="函数调用的本质"><a href="#函数调用的本质" class="headerlink" title="函数调用的本质"></a>函数调用的本质</h1><blockquote><p>包括：<br><code>全局函数</code><br>非静态非虚函数、虚函数 (<code>成员函数</code>)<br><code>构造函数、拷贝构造函数和析构函数</code></p></blockquote><p><code>如下图：</code></p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/cover.png" alt="在这里插入图片描述"></p><h2 id="借助汇编代码理解函数的调用"><a href="#借助汇编代码理解函数的调用" class="headerlink" title="借助汇编代码理解函数的调用"></a>借助汇编代码理解函数的调用</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/08d8c44849f5437ca5aaed0c8b02fcc0.png" alt="在这里插入图片描述"></p><hr>]]></content>
-      
-      
-      <categories>
-          
-          <category> C++相关 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 函数调用原理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>C++对象布局总览</title>
       <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/"/>
       <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/C++%E5%AF%B9%E8%B1%A1%E5%B8%83%E5%B1%80%E6%80%BB%E8%A7%88/</url>
@@ -71,31 +46,6 @@
         <tags>
             
             <tag> C++对象布局总览 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>深度理解指针类型转换</title>
-      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
-      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-      
-        <content type="html"><![CDATA[<h1 id="指针变量的类型有两个意义："><a href="#指针变量的类型有两个意义：" class="headerlink" title="指针变量的类型有两个意义："></a>指针变量的类型有两个意义：</h1><p>1.指针类型决定了指针变量访问空间的能力<br>2.指针类型决定了指针的步长</p><h1 id="指针类型转换的实质："><a href="#指针类型转换的实质：" class="headerlink" title="指针类型转换的实质："></a>指针类型转换的实质：</h1><p>实际上就是从指针变量里取出内存地址，然后根据指针指向的类型去访问和修改对应字节大小的内存数据</p><h2 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h2><p>64位程序中 任何指针对象的大小都为8个字节（因为指针对象仅仅保存地址）32位程序中占4个字节</p><p>如图：<br>ShapePainter类里面只有5个int类型的变量（每个int占用4个字节），因此ShapePainter类对象的大小为20个字节（函数不占用对象的大小）&#x2F;&#x2F;详见C++对象模型<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/605f24b5f51e456b95039a19bbb390d2.png" alt="在这里插入图片描述"></p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">std::cout &lt;&lt;<span class="string">&quot;sizeof(ShapePainter):&quot;</span>&lt;&lt; (<span class="type">int</span>)<span class="built_in">sizeof</span>(ShapePainter) &lt;&lt; std::endl;    <span class="comment">//输出为20</span></span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;sizeof(ShapePainter*):&quot;</span> &lt;&lt; (<span class="type">int</span>)<span class="built_in">sizeof</span>(ShapePainter*) &lt;&lt; std::endl;<span class="comment">//输出为8</span></span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">ShapePainter *sp=<span class="keyword">new</span> ShapePainter;</span><br><span class="line"><span class="type">char</span>* c = <span class="built_in">static_cast</span>&lt;<span class="type">char</span>*&gt;(sp);<span class="comment">//指针sp储存的地址没有变化</span></span><br><span class="line">*c=‘!’;                        <span class="comment">//只是转变为char*之后只能访问一个字节的数据了（转换前可以访问和修改20个字节）</span></span><br></pre></td></tr></table></figure><h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">16519441</span>;  <span class="number">16</span>进制形式是<span class="number">00</span>fc1111</span><br><span class="line"><span class="type">int</span>* p1 = &amp;a;</span><br><span class="line">*p1 = <span class="number">10</span>;  解引用修改a的值</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a = %d\n&quot;</span>, a);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因为指针变量p1的类型是int*，所以他进行解引用操作时可以访问4个字节的空间。 </p><p>如下图。F10调试，打开内存观察（具体操作步骤：调试-窗口-内存），在内存窗口输入p1，自动显示p1中存放的地址（0x008FFE24），注意在内存中每一个字节都有自己的地址，这里地址所指向内存中存放的值是以16进制的形式呈现的【一个地址（0x008FFE24）所指向的一个字节的内存空间里面存放着2位16进制数（11）】【解释上一句话：我们从进制转化中可知，两位16进制数可以用8位2进制数表示，在内存中数字是以二进制形式存放的，8位二进制数在内存中占8bit空间，即1个字节空间，对应16进制的两位（11）】。因此，整型变量a（16进制形式为：00 fc 11 11）占4个字节，即从地址0x008FFE24到地址0x008FFE27的这一段内存空间，存放了整型变量a。</p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/ea3736e8c45745b58ea5b8855d000188.png" alt="在这里插入图片描述"><br>继续按F10调试，第491行执行，p1解引用访问到4个字节的空间，并将其修改为10（16进制表示为00 00 00 0a），如下图<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/d8a0cc30441f4e5ab76dc2847bf4f72b.png" alt="在这里插入图片描述"></p><h2 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">16519441</span>;  <span class="number">16</span>进制形式是<span class="number">00</span>fc1111</span><br><span class="line"><span class="type">char</span>* p2 = (<span class="type">char</span>*)&amp;a;</span><br><span class="line">*p2 = <span class="number">10</span>;  解引用修改a的值</span><br><span class="line"> </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a = %d\n&quot;</span>, a);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因为指针变量p2的类型是char*，所以他进行解引用操作时可以访问1个字节的空间。</p><p>如下图。还是和例1相同的操作，F10调试，打开内存观察，在内存窗口输入p2，观察p2地址及其向后的四个地址（0x012FF794-0x012FF797)，表示存放整型变量a（16进制表示：00 fc 11 11）<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/cover.png" alt="在这里插入图片描述"><br>继续按F10调试，第491行执行，p2解引用访问到1个字节的空间，并将其修改为10（16进制表示为0a），如下图<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/c7443964b9874498b3977681e83b0127.png" alt="在这里插入图片描述"></p><p>可以看到，p2只有1个字节的访问权限，他只能修改内存空间中1个字节的数据，即0x012FF794指向的1个字节空间，后面的3个字节（11 fc 00）都没有被修改，因此printf以整型打印a的结果就是16519434（00 fc 11 0a）</p><p>总结：虽然p2也保存了整型变量a的地址，和p1中保存的地址是一模一样的，但因为p2的类型是char<em>，而p1的类型int</em>，他们进行解引用操作时访问空间的能力不同，导致解引用对整型变量a修改时产生不同的效果</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>1.假设有个整型数组arr1，arr1是数组中第一个整型元素的地址，arr1+1的意义是什么；</p><p>2.假设有个字符型数组arr2，arr2是数组中第一个字符型元素的地址，arr2+1的意义是什么；</p><p>3.下面代码输出的结果是什么；</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">0x33445566</span>;</span><br><span class="line">    <span class="type">char</span> *pc = (<span class="type">char</span>*)&amp;a;</span><br><span class="line">    *pc = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%x\n&quot;</span>, a);<span class="comment">//以16进制的形式打印整数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>答：</p><p>1.数组中元素在内存中的存放是连续的，”arr1+1”是整型数组arr1中第二个整型元素的地址</p><p>2.”arr2+1”是字符型数组arr2中第二个字符型元素的地址</p><p>3.输出33445500</p><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>C语言-不同类型的指针变量的区别：<a href="https://blog.csdn.net/m0_70780664/article/details/127079106?spm=1001.2014.3001.5506">https://blog.csdn.net/m0_70780664/article/details/127079106?spm=1001.2014.3001.5506</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> C++相关 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 指针类型转换 </tag>
             
         </tags>
       
@@ -129,6 +79,31 @@
     
     
     <entry>
+      <title>深度理解指针类型转换</title>
+      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"/>
+      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="指针变量的类型有两个意义："><a href="#指针变量的类型有两个意义：" class="headerlink" title="指针变量的类型有两个意义："></a>指针变量的类型有两个意义：</h1><p>1.指针类型决定了指针变量访问空间的能力<br>2.指针类型决定了指针的步长</p><h1 id="指针类型转换的实质："><a href="#指针类型转换的实质：" class="headerlink" title="指针类型转换的实质："></a>指针类型转换的实质：</h1><p>实际上就是从指针变量里取出内存地址，然后根据指针指向的类型去访问和修改对应字节大小的内存数据</p><h2 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h2><p>64位程序中 任何指针对象的大小都为8个字节（因为指针对象仅仅保存地址）32位程序中占4个字节</p><p>如图：<br>ShapePainter类里面只有5个int类型的变量（每个int占用4个字节），因此ShapePainter类对象的大小为20个字节（函数不占用对象的大小）&#x2F;&#x2F;详见C++对象模型<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/605f24b5f51e456b95039a19bbb390d2.png" alt="在这里插入图片描述"></p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">std::cout &lt;&lt;<span class="string">&quot;sizeof(ShapePainter):&quot;</span>&lt;&lt; (<span class="type">int</span>)<span class="built_in">sizeof</span>(ShapePainter) &lt;&lt; std::endl;    <span class="comment">//输出为20</span></span><br><span class="line">std::cout &lt;&lt; <span class="string">&quot;sizeof(ShapePainter*):&quot;</span> &lt;&lt; (<span class="type">int</span>)<span class="built_in">sizeof</span>(ShapePainter*) &lt;&lt; std::endl;<span class="comment">//输出为8</span></span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">ShapePainter *sp=<span class="keyword">new</span> ShapePainter;</span><br><span class="line"><span class="type">char</span>* c = <span class="built_in">static_cast</span>&lt;<span class="type">char</span>*&gt;(sp);<span class="comment">//指针sp储存的地址没有变化</span></span><br><span class="line">*c=‘!’;                        <span class="comment">//只是转变为char*之后只能访问一个字节的数据了（转换前可以访问和修改20个字节）</span></span><br></pre></td></tr></table></figure><h2 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">16519441</span>;  <span class="number">16</span>进制形式是<span class="number">00</span>fc1111</span><br><span class="line"><span class="type">int</span>* p1 = &amp;a;</span><br><span class="line">*p1 = <span class="number">10</span>;  解引用修改a的值</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a = %d\n&quot;</span>, a);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因为指针变量p1的类型是int*，所以他进行解引用操作时可以访问4个字节的空间。 </p><p>如下图。F10调试，打开内存观察（具体操作步骤：调试-窗口-内存），在内存窗口输入p1，自动显示p1中存放的地址（0x008FFE24），注意在内存中每一个字节都有自己的地址，这里地址所指向内存中存放的值是以16进制的形式呈现的【一个地址（0x008FFE24）所指向的一个字节的内存空间里面存放着2位16进制数（11）】【解释上一句话：我们从进制转化中可知，两位16进制数可以用8位2进制数表示，在内存中数字是以二进制形式存放的，8位二进制数在内存中占8bit空间，即1个字节空间，对应16进制的两位（11）】。因此，整型变量a（16进制形式为：00 fc 11 11）占4个字节，即从地址0x008FFE24到地址0x008FFE27的这一段内存空间，存放了整型变量a。</p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/ea3736e8c45745b58ea5b8855d000188.png" alt="在这里插入图片描述"><br>继续按F10调试，第491行执行，p1解引用访问到4个字节的空间，并将其修改为10（16进制表示为00 00 00 0a），如下图<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/d8a0cc30441f4e5ab76dc2847bf4f72b.png" alt="在这里插入图片描述"></p><h2 id="例3"><a href="#例3" class="headerlink" title="例3"></a>例3</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">16519441</span>;  <span class="number">16</span>进制形式是<span class="number">00</span>fc1111</span><br><span class="line"><span class="type">char</span>* p2 = (<span class="type">char</span>*)&amp;a;</span><br><span class="line">*p2 = <span class="number">10</span>;  解引用修改a的值</span><br><span class="line"> </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;a = %d\n&quot;</span>, a);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>因为指针变量p2的类型是char*，所以他进行解引用操作时可以访问1个字节的空间。</p><p>如下图。还是和例1相同的操作，F10调试，打开内存观察，在内存窗口输入p2，观察p2地址及其向后的四个地址（0x012FF794-0x012FF797)，表示存放整型变量a（16进制表示：00 fc 11 11）<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/cover.png" alt="在这里插入图片描述"><br>继续按F10调试，第491行执行，p2解引用访问到1个字节的空间，并将其修改为10（16进制表示为0a），如下图<br><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/c7443964b9874498b3977681e83b0127.png" alt="在这里插入图片描述"></p><p>可以看到，p2只有1个字节的访问权限，他只能修改内存空间中1个字节的数据，即0x012FF794指向的1个字节空间，后面的3个字节（11 fc 00）都没有被修改，因此printf以整型打印a的结果就是16519434（00 fc 11 0a）</p><p>总结：虽然p2也保存了整型变量a的地址，和p1中保存的地址是一模一样的，但因为p2的类型是char<em>，而p1的类型int</em>，他们进行解引用操作时访问空间的能力不同，导致解引用对整型变量a修改时产生不同的效果</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>1.假设有个整型数组arr1，arr1是数组中第一个整型元素的地址，arr1+1的意义是什么；</p><p>2.假设有个字符型数组arr2，arr2是数组中第一个字符型元素的地址，arr2+1的意义是什么；</p><p>3.下面代码输出的结果是什么；</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="type">int</span> a = <span class="number">0x33445566</span>;</span><br><span class="line">    <span class="type">char</span> *pc = (<span class="type">char</span>*)&amp;a;</span><br><span class="line">    *pc = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%x\n&quot;</span>, a);<span class="comment">//以16进制的形式打印整数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>答：</p><p>1.数组中元素在内存中的存放是连续的，”arr1+1”是整型数组arr1中第二个整型元素的地址</p><p>2.”arr2+1”是字符型数组arr2中第二个字符型元素的地址</p><p>3.输出33445500</p><h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p>C语言-不同类型的指针变量的区别：<a href="https://blog.csdn.net/m0_70780664/article/details/127079106?spm=1001.2014.3001.5506">https://blog.csdn.net/m0_70780664/article/details/127079106?spm=1001.2014.3001.5506</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> C++相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 指针类型转换 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Docker</title>
       <link href="/2023/11/11/%E8%B7%A8%E5%B9%B3%E5%8F%B0/Docker/Docker%E5%AE%9E%E7%94%A8%E7%AF%87/"/>
       <url>/2023/11/11/%E8%B7%A8%E5%B9%B3%E5%8F%B0/Docker/Docker%E5%AE%9E%E7%94%A8%E7%AF%87/</url>
@@ -146,6 +121,31 @@
         <tags>
             
             <tag> Docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++函数调用原理</title>
+      <link href="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/"/>
+      <url>/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/</url>
+      
+        <content type="html"><![CDATA[<hr><h1 id="函数调用的本质"><a href="#函数调用的本质" class="headerlink" title="函数调用的本质"></a>函数调用的本质</h1><blockquote><p>包括：<br><code>全局函数</code><br>非静态非虚函数、虚函数 (<code>成员函数</code>)<br><code>构造函数、拷贝构造函数和析构函数</code></p></blockquote><p><code>如下图：</code></p><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/cover.png" alt="在这里插入图片描述"></p><h2 id="借助汇编代码理解函数的调用"><a href="#借助汇编代码理解函数的调用" class="headerlink" title="借助汇编代码理解函数的调用"></a>借助汇编代码理解函数的调用</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p><img src="/2023/11/11/C++%E7%9B%B8%E5%85%B3/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E5%8E%9F%E7%90%86/08d8c44849f5437ca5aaed0c8b02fcc0.png" alt="在这里插入图片描述"></p><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> C++相关 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 函数调用原理 </tag>
             
         </tags>
       
