@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620">
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:28px;font-weight:700;fill:#0f172a}
+      .txt{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:22px;font-weight:700;fill:#0f172a}
+      .small{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:16px;fill:#334155}
+      .host{fill:#e0f2fe;stroke:#0284c7;stroke-width:2;rx:12}
+      .mw{fill:#dcfce7;stroke:#16a34a;stroke-width:3;rx:12}
+      .out{fill:#fff7ed;stroke:#ea580c;stroke-width:2;rx:12}
+      .arrow{stroke:#475569;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1280" height="620"/>
+  <text class="title" x="40" y="50">ModuleWorks 在刀路计算中的典型位置</text>
+
+  <g transform="translate(50,115)">
+    <g transform="translate(0,0)">
+      <rect class="host" width="210" height="95" rx="12"/>
+      <text class="txt" x="105" y="38" text-anchor="middle">自研 CAM</text>
+      <text class="small" x="105" y="66" text-anchor="middle">项目 / UI / 几何选择</text>
+    </g>
+    <g transform="translate(280,0)">
+      <rect class="host" width="230" height="95" rx="12"/>
+      <text class="txt" x="115" y="38" text-anchor="middle">输入适配</text>
+      <text class="small" x="115" y="66" text-anchor="middle">BRep / Mesh / Tool</text>
+    </g>
+    <g transform="translate(590,-25)">
+      <rect class="mw" width="300" height="145" rx="12"/>
+      <text class="txt" x="150" y="42" text-anchor="middle">ModuleWorks</text>
+      <text class="small" x="150" y="72" text-anchor="middle">策略算法 / 碰撞避让</text>
+      <text class="small" x="150" y="100" text-anchor="middle">粗加工 / 精加工 / 五轴</text>
+    </g>
+    <g transform="translate(970,0)">
+      <rect class="out" width="240" height="95" rx="12"/>
+      <text class="txt" x="120" y="38" text-anchor="middle">CL 刀位</text>
+      <text class="small" x="120" y="66" text-anchor="middle">点位 / 刀轴 / 进给</text>
+    </g>
+    <line class="arrow" x1="210" y1="48" x2="270" y2="48"/>
+    <line class="arrow" x1="510" y1="48" x2="580" y2="48"/>
+    <line class="arrow" x1="890" y1="48" x2="960" y2="48"/>
+  </g>
+
+  <g transform="translate(130,330)">
+    <g transform="translate(0,0)">
+      <rect class="host" width="230" height="92" rx="12"/>
+      <text class="txt" x="115" y="36" text-anchor="middle">刀路显示</text>
+      <text class="small" x="115" y="64" text-anchor="middle">拾取 / 高亮 / 编辑</text>
+    </g>
+    <g transform="translate(310,0)">
+      <rect class="out" width="230" height="92" rx="12"/>
+      <text class="txt" x="115" y="36" text-anchor="middle">后置处理</text>
+      <text class="small" x="115" y="64" text-anchor="middle">FANUC / Siemens / TNC</text>
+    </g>
+    <g transform="translate(620,0)">
+      <rect class="mw" width="275" height="92" rx="12"/>
+      <text class="txt" x="137" y="36" text-anchor="middle">仿真验证</text>
+      <text class="small" x="137" y="64" text-anchor="middle">材料去除 / 碰撞 / 余量</text>
+    </g>
+    <g transform="translate(975,0)">
+      <rect class="out" width="190" height="92" rx="12"/>
+      <text class="txt" x="95" y="36" text-anchor="middle">放行报告</text>
+      <text class="small" x="95" y="64" text-anchor="middle">版本 / 风险 / 结论</text>
+    </g>
+    <line class="arrow" x1="230" y1="46" x2="300" y2="46"/>
+    <line class="arrow" x1="540" y1="46" x2="610" y2="46"/>
+    <line class="arrow" x1="895" y1="46" x2="965" y2="46"/>
+  </g>
+
+  <text class="small" x="62" y="535">核心思想：ModuleWorks 负责成熟算法与验证能力；主系统负责工艺语义、数据管理、后置、报告和用户工作流。</text>
+</svg>

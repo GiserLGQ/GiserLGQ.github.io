@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="680" viewBox="0 0 1280 680">
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}
+      .title{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:28px;font-weight:700;fill:#0f172a}
+      .txt{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:22px;font-weight:700;fill:#0f172a}
+      .small{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:16px;fill:#334155}
+      .layer{fill:#ffffff;stroke:#475569;stroke-width:2;rx:12}
+      .mw{fill:#dcfce7;stroke:#16a34a;stroke-width:3;rx:12}
+      .risk{fill:#fee2e2;stroke:#dc2626;stroke-width:2;rx:12}
+      .arrow{stroke:#475569;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1280" height="680"/>
+  <text class="title" x="40" y="52">刀路仿真与 NC 验证的分层</text>
+
+  <g transform="translate(90,105)">
+    <g transform="translate(0,0)">
+      <rect class="layer" width="270" height="98" rx="12"/>
+      <text class="txt" x="135" y="39" text-anchor="middle">输入数据</text>
+      <text class="small" x="135" y="68" text-anchor="middle">零件 / 毛坯 / 夹具 / 刀具</text>
+    </g>
+    <g transform="translate(350,0)">
+      <rect class="mw" width="300" height="98" rx="12"/>
+      <text class="txt" x="150" y="39" text-anchor="middle">ModuleWorks 仿真</text>
+      <text class="small" x="150" y="68" text-anchor="middle">材料去除 / 余量 / 过切</text>
+    </g>
+    <g transform="translate(730,0)">
+      <rect class="layer" width="300" height="98" rx="12"/>
+      <text class="txt" x="150" y="39" text-anchor="middle">结果显示</text>
+      <text class="small" x="150" y="68" text-anchor="middle">颜色图 / 报告 / 定位</text>
+    </g>
+    <line class="arrow" x1="270" y1="49" x2="340" y2="49"/>
+    <line class="arrow" x1="650" y1="49" x2="720" y2="49"/>
+  </g>
+
+  <g transform="translate(90,285)">
+    <g transform="translate(0,0)">
+      <rect class="layer" width="270" height="98" rx="12"/>
+      <text class="txt" x="135" y="39" text-anchor="middle">NC 程序</text>
+      <text class="small" x="135" y="68" text-anchor="middle">G 代码 / 循环 / 宏</text>
+    </g>
+    <g transform="translate(350,0)">
+      <rect class="mw" width="300" height="98" rx="12"/>
+      <text class="txt" x="150" y="39" text-anchor="middle">NC 解释与验证</text>
+      <text class="small" x="150" y="68" text-anchor="middle">后置结果 / 控制器语义</text>
+    </g>
+    <g transform="translate(730,0)">
+      <rect class="risk" width="300" height="98" rx="12"/>
+      <text class="txt" x="150" y="39" text-anchor="middle">风险发现</text>
+      <text class="small" x="150" y="68" text-anchor="middle">语法 / 快移 / 坐标错误</text>
+    </g>
+    <line class="arrow" x1="270" y1="49" x2="340" y2="49"/>
+    <line class="arrow" x1="650" y1="49" x2="720" y2="49"/>
+  </g>
+
+  <g transform="translate(90,465)">
+    <g transform="translate(0,0)">
+      <rect class="layer" width="270" height="98" rx="12"/>
+      <text class="txt" x="135" y="39" text-anchor="middle">机床模型</text>
+      <text class="small" x="135" y="68" text-anchor="middle">运动链 / 轴限位 / 部件</text>
+    </g>
+    <g transform="translate(350,0)">
+      <rect class="mw" width="300" height="98" rx="12"/>
+      <text class="txt" x="150" y="39" text-anchor="middle">机床仿真</text>
+      <text class="small" x="150" y="68" text-anchor="middle">轴运动 / 干涉 / 超程</text>
+    </g>
+    <g transform="translate(730,0)">
+      <rect class="risk" width="300" height="98" rx="12"/>
+      <text class="txt" x="150" y="39" text-anchor="middle">放行依据</text>
+      <text class="small" x="150" y="68" text-anchor="middle">报告 / 截图 / 版本记录</text>
+    </g>
+    <line class="arrow" x1="270" y1="49" x2="340" y2="49"/>
+    <line class="arrow" x1="650" y1="49" x2="720" y2="49"/>
+  </g>
+</svg>

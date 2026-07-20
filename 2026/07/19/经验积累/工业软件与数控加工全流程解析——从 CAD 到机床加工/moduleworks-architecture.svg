@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="700" viewBox="0 0 1280 700">
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.host{fill:#eff6ff;stroke:#2563eb;stroke-width:2;rx:12}.mw{fill:#ecfdf5;stroke:#059669;stroke-width:3;rx:12}.shared{fill:#fff7ed;stroke:#ea580c;stroke-width:2;rx:12}.txt{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:23px;fill:#0f172a}.small{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:17px;fill:#334155}.line{stroke:#64748b;stroke-width:2.5;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="700"/>
+  <text class="txt" x="40" y="50">自研 CAM 与 ModuleWorks 的常见职责边界</text>
+  <rect class="host" x="60" y="110" width="340" height="470"/>
+  <text class="txt" x="158" y="150">主软件负责</text>
+  <text class="small" x="95" y="195">项目文件 / 版本 / 权限</text>
+  <text class="small" x="95" y="230">CAD 导入 / 几何修复</text>
+  <text class="small" x="95" y="265">UI 交互 / 选择 / 参数表</text>
+  <text class="small" x="95" y="300">刀具库 / 机床库 / 后置库</text>
+  <text class="small" x="95" y="335">工艺模板 / 报表 / 集成</text>
+  <text class="small" x="95" y="370">后置处理 / DNC / MES</text>
+  <text class="small" x="95" y="405">错误提示 / 工作流 / 审批</text>
+  <rect class="mw" x="470" y="110" width="340" height="470"/>
+  <text class="txt" x="560" y="150">ModuleWorks 负责</text>
+  <text class="small" x="505" y="195">三轴 / 五轴刀路策略</text>
+  <text class="small" x="505" y="230">粗加工 / 精加工 / 清根</text>
+  <text class="small" x="505" y="265">刀轴控制 / 避让 / 光顺</text>
+  <text class="small" x="505" y="300">材料去除仿真</text>
+  <text class="small" x="505" y="335">碰撞检测 / 余量分析</text>
+  <text class="small" x="505" y="370">机床仿真组件</text>
+  <text class="small" x="505" y="405">可视化验证组件</text>
+  <rect class="shared" x="880" y="110" width="340" height="470"/>
+  <text class="txt" x="975" y="150">接口层负责</text>
+  <text class="small" x="915" y="195">几何适配：BRep / Mesh</text>
+  <text class="small" x="915" y="230">刀具适配：Cutter / Holder</text>
+  <text class="small" x="915" y="265">参数适配：策略参数映射</text>
+  <text class="small" x="915" y="300">结果适配：CL / Polyline</text>
+  <text class="small" x="915" y="335">日志适配：错误码 / 警告</text>
+  <text class="small" x="915" y="370">坐标适配：Setup / WCS</text>
+  <text class="small" x="915" y="405">生命周期：创建 / 缓存 / 释放</text>
+  <line class="line" x1="400" y1="345" x2="462" y2="345"/><line class="line" x1="810" y1="345" x2="872" y2="345"/>
+</svg>

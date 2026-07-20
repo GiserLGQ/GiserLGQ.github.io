@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="650" viewBox="0 0 1280 650">
+  <defs>
+    <style>
+      .bg{fill:#f8fafc}.core{fill:#dbeafe;stroke:#1d4ed8;stroke-width:3;rx:14}.node{fill:#ffffff;stroke:#64748b;stroke-width:2;rx:10}.mw{fill:#ecfdf5;stroke:#059669;stroke-width:2;rx:10}.txt{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:23px;fill:#0f172a}.small{font-family:"Microsoft YaHei",Arial,sans-serif;font-size:17px;fill:#334155}.line{stroke:#64748b;stroke-width:2.5;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="650"/>
+  <text class="txt" x="40" y="50">CAM 项目中的核心对象关系</text>
+  <rect class="core" x="500" y="255" width="280" height="120"/>
+  <text class="txt" x="585" y="305">CAMProject</text>
+  <text class="small" x="535" y="338">Setup / Operation / Toolpath</text>
+  <g>
+    <rect class="node" x="70" y="110" width="240" height="88"/><text class="txt" x="132" y="145">零件模型</text><text class="small" x="105" y="174">BRep / Mesh / PMI</text>
+    <rect class="node" x="70" y="285" width="240" height="88"/><text class="txt" x="154" y="320">毛坯</text><text class="small" x="104" y="349">Box / STL / 上序余料</text>
+    <rect class="node" x="70" y="460" width="240" height="88"/><text class="txt" x="154" y="495">夹具</text><text class="small" x="106" y="524">虎钳 / 压板 / 转台</text>
+    <rect class="node" x="970" y="110" width="240" height="88"/><text class="txt" x="1055" y="145">机床</text><text class="small" x="1015" y="174">轴 / 行程 / 控制器</text>
+    <rect class="node" x="970" y="285" width="240" height="88"/><text class="txt" x="1055" y="320">刀具库</text><text class="small" x="1015" y="349">刀刃 / 刀杆 / 刀柄</text>
+    <rect class="node" x="970" y="460" width="240" height="88"/><text class="txt" x="1055" y="495">后置</text><text class="small" x="1010" y="524">语法 / 运动学 / 模板</text>
+    <rect class="mw" x="500" y="80" width="280" height="92"/><text class="txt" x="550" y="118">ModuleWorks</text><text class="small" x="535" y="146">刀路算法 / 仿真组件</text>
+  </g>
+  <line class="line" x1="310" y1="154" x2="492" y2="280"/><line class="line" x1="310" y1="329" x2="492" y2="315"/><line class="line" x1="310" y1="504" x2="492" y2="350"/>
+  <line class="line" x1="970" y1="154" x2="788" y2="280"/><line class="line" x1="970" y1="329" x2="788" y2="315"/><line class="line" x1="970" y1="504" x2="788" y2="350"/>
+  <line class="line" x1="640" y1="172" x2="640" y2="247"/>
+</svg>
