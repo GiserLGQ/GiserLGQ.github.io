@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 565" font-family="system-ui, 'Microsoft YaHei', 'PingFang SC', sans-serif">
+  <!-- 标题 -->
+  <text x="590" y="34" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">一个八度 = 7 个白键 + 5 个黑键 = 12 个半音</text>
+
+  <!-- 半音括线：E-F、B-C -->
+  <path d="M 504 68 L 504 58 L 516 58 L 516 68" fill="none" stroke="#64748b" stroke-width="2"/>
+  <text x="540" y="67" text-anchor="start" font-size="15" fill="#64748b">半音</text>
+  <path d="M 824 68 L 824 58 L 836 58 L 836 68" fill="none" stroke="#64748b" stroke-width="2"/>
+  <text x="856" y="67" text-anchor="start" font-size="15" fill="#64748b">半音</text>
+
+  <!-- 白键 -->
+  <rect x="270" y="90" width="80" height="300" fill="#dbeafe" stroke="#334155" stroke-width="1.5"/>
+  <rect x="350" y="90" width="80" height="300" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <rect x="430" y="90" width="80" height="300" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <rect x="510" y="90" width="80" height="300" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <rect x="590" y="90" width="80" height="300" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <rect x="670" y="90" width="80" height="300" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <rect x="750" y="90" width="80" height="300" fill="#ffffff" stroke="#334155" stroke-width="1.5"/>
+  <rect x="830" y="90" width="80" height="300" fill="#ffedd5" stroke="#334155" stroke-width="1.5"/>
+
+  <!-- 黑键 -->
+  <rect x="328" y="90" width="44" height="185" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+  <rect x="408" y="90" width="44" height="185" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+  <rect x="568" y="90" width="44" height="185" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+  <rect x="648" y="90" width="44" height="185" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+  <rect x="728" y="90" width="44" height="185" rx="4" fill="#1e293b" stroke="#0f172a" stroke-width="1.5"/>
+
+  <!-- 黑键音名 -->
+  <text x="350" y="264" text-anchor="middle" font-size="15" fill="#e2e8f0">C♯</text>
+  <text x="430" y="264" text-anchor="middle" font-size="15" fill="#e2e8f0">D♯</text>
+  <text x="590" y="264" text-anchor="middle" font-size="15" fill="#e2e8f0">F♯</text>
+  <text x="670" y="264" text-anchor="middle" font-size="15" fill="#e2e8f0">G♯</text>
+  <text x="750" y="264" text-anchor="middle" font-size="15" fill="#e2e8f0">A♯</text>
+
+  <!-- 白键音名 -->
+  <text x="310" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#1d4ed8">C</text>
+  <text x="390" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#1e293b">D</text>
+  <text x="470" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#1e293b">E</text>
+  <text x="550" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#1e293b">F</text>
+  <text x="630" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#1e293b">G</text>
+  <text x="710" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#1e293b">A</text>
+  <text x="790" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#1e293b">B</text>
+  <text x="870" y="418" text-anchor="middle" font-size="21" font-weight="bold" fill="#c2410c">C</text>
+
+  <!-- 频率标注 -->
+  <text x="310" y="444" text-anchor="middle" font-size="14" fill="#1d4ed8">262 Hz</text>
+  <text x="870" y="444" text-anchor="middle" font-size="14" fill="#c2410c">523 Hz</text>
+
+  <!-- 八度弧线 -->
+  <path d="M 310 468 Q 590 528 870 468" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="590" y="516" text-anchor="middle" font-size="16" fill="#475569">八度：音名相同，频率正好翻倍</text>
+
+  <!-- 底部说明 -->
+  <text x="590" y="550" text-anchor="middle" font-size="15" fill="#64748b">相邻两个键（不分黑白）相差一个半音；E–F、B–C 之间没有黑键</text>
+</svg>

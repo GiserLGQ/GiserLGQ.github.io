@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 880" font-family="system-ui, 'Microsoft YaHei', 'PingFang SC', sans-serif">
+  <defs>
+    <marker id="arwR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#dc2626"/>
+    </marker>
+    <marker id="arwB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+
+  <!-- 环形底色 -->
+  <circle cx="440" cy="440" r="320" fill="#fff1f2"/>
+  <circle cx="440" cy="440" r="225" fill="#f0fdf4"/>
+  <circle cx="440" cy="440" r="135" fill="#fffbeb"/>
+  <circle cx="440" cy="440" r="320" fill="none" stroke="#e4e4e7" stroke-width="1.5"/>
+  <circle cx="440" cy="440" r="225" fill="none" stroke="#e4e4e7" stroke-width="1.5"/>
+  <circle cx="440" cy="440" r="135" fill="none" stroke="#e4e4e7" stroke-width="1.5"/>
+
+  <!-- 12 条分隔线 -->
+  <g stroke="#d6d3d1" stroke-width="1.2">
+    <line x1="523" y1="131" x2="475" y2="310"/>
+    <line x1="666" y1="214" x2="536" y2="345"/>
+    <line x1="749" y1="357" x2="570" y2="405"/>
+    <line x1="749" y1="523" x2="570" y2="475"/>
+    <line x1="666" y1="666" x2="536" y2="535"/>
+    <line x1="523" y1="749" x2="475" y2="570"/>
+    <line x1="357" y1="749" x2="405" y2="570"/>
+    <line x1="214" y1="666" x2="345" y2="536"/>
+    <line x1="131" y1="523" x2="310" y2="475"/>
+    <line x1="131" y1="357" x2="310" y2="405"/>
+    <line x1="214" y1="214" x2="345" y2="345"/>
+    <line x1="357" y1="131" x2="405" y2="310"/>
+  </g>
+
+  <!-- 顺时针 / 逆时针箭头 -->
+  <path d="M 481 102 A 340 340 0 0 1 594 137" fill="none" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arwR)"/>
+  <text x="546" y="86" text-anchor="middle" font-size="16" font-weight="bold" fill="#dc2626">顺时针</text>
+  <text x="546" y="106" text-anchor="middle" font-size="13" fill="#b91c1c">每格加 1 个升号</text>
+  <path d="M 399 102 A 340 340 0 0 0 286 137" fill="none" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arwB)"/>
+  <text x="334" y="86" text-anchor="middle" font-size="16" font-weight="bold" fill="#2563eb">逆时针</text>
+  <text x="334" y="106" text-anchor="middle" font-size="13" fill="#1d4ed8">每格加 1 个降号</text>
+
+  <!-- 外圈：大调（红） -->
+  <g font-weight="bold" fill="#b91c1c" font-size="34" text-anchor="middle">
+    <text x="440" y="182">C</text>
+    <text x="575" y="218">G</text>
+    <text x="674" y="317">D</text>
+    <text x="710" y="452">A</text>
+    <text x="674" y="587">E</text>
+    <text x="575" y="686">B</text>
+    <text x="440" y="722" font-size="29">F♯/G♭</text>
+    <text x="305" y="686" font-size="29">D♭</text>
+    <text x="206" y="587" font-size="29">A♭</text>
+    <text x="170" y="452" font-size="29">E♭</text>
+    <text x="206" y="317" font-size="29">B♭</text>
+    <text x="305" y="218">F</text>
+  </g>
+  <!-- 记号数（小字） -->
+  <g fill="#78716c" font-size="15" text-anchor="middle">
+    <text x="440" y="204">无升降号</text>
+    <text x="575" y="240">1♯</text>
+    <text x="674" y="339">2♯</text>
+    <text x="710" y="474">3♯</text>
+    <text x="674" y="609">4♯</text>
+    <text x="575" y="708">5♯</text>
+    <text x="440" y="744">6♯ 或 6♭</text>
+    <text x="305" y="708">5♭</text>
+    <text x="206" y="609">4♭</text>
+    <text x="170" y="474">3♭</text>
+    <text x="206" y="339">2♭</text>
+    <text x="305" y="240">1♭</text>
+  </g>
+
+  <!-- 内圈：关系小调（绿） -->
+  <g font-weight="bold" fill="#15803d" font-size="22" text-anchor="middle">
+    <text x="440" y="270">a</text>
+    <text x="529" y="294">e</text>
+    <text x="594" y="359">b</text>
+    <text x="618" y="448">f♯</text>
+    <text x="594" y="537">c♯</text>
+    <text x="529" y="602">g♯</text>
+    <text x="440" y="626" font-size="19">g♯/a♭</text>
+    <text x="351" y="602" font-size="19">b♭</text>
+    <text x="286" y="537">f</text>
+    <text x="262" y="448">c</text>
+    <text x="286" y="359">g</text>
+    <text x="351" y="294">d</text>
+  </g>
+
+  <!-- 中心说明 -->
+  <text x="440" y="404" text-anchor="middle" font-size="27" font-weight="bold" fill="#92400e">五度圈</text>
+  <text x="440" y="436" text-anchor="middle" font-size="15" fill="#78716c">外圈红字 = 大调</text>
+  <text x="440" y="460" text-anchor="middle" font-size="15" fill="#78716c">内圈绿字 = 关系小调</text>
+  <text x="440" y="492" text-anchor="middle" font-size="14" fill="#a16207">相邻的调关系最亲密，</text>
+  <text x="440" y="513" text-anchor="middle" font-size="14" fill="#a16207">适合转调与和弦编配</text>
+
+  <!-- 底注 -->
+  <text x="440" y="862" text-anchor="middle" font-size="14" fill="#a8a29e">从 C 出发按纯五度（7 个半音）依次排列，走 12 步回到 C</text>
+</svg>
